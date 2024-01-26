@@ -94,7 +94,7 @@ GitHub.
 необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
 `basename` точное название твоего репозитория. Слеш в начале строки обязателен.
 
-```jsx
+```jsx 
 <BrowserRouter basename="/your_repo_name">
   <App />
 </BrowserRouter>
