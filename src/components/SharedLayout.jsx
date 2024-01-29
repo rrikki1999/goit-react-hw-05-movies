@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const Logo = styled.div`
   color: white;
-  font-size: 30px;
+  font-size: 20px;
 `;
 
 const Nav = styled.nav`
