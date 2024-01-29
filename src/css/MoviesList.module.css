@@ -1,0 +1,33 @@
+
+
+.moviesList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .moviesListItem {
+    margin: 10px;
+  }
+  
+  .moviesListLink {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    text-align: center;
+  }
+  
+  .moviesListImg {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .moviesListTitle {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
