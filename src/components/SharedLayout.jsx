@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   background-color: #7A8084; 
-  padding: 30px 150px 30px 150px; 
+  padding: 20px 50px; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +23,7 @@ const Nav = styled.nav`
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: white;
-  font-size: 30px; 
+  font-size: 20px; 
   font-weight: bold;
   transition: background-color 0.3s; 
   border-radius:90px;
