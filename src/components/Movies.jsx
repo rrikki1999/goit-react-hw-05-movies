@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { searchMovies } from '../services/api'; 
 import { Link, useLocation } from 'react-router-dom';
 import css from '../css/MoviesList.module.css';
+import styles from '../css/Movies.module.css';
+
 export const MoviesList = ({ movies }) => {
     const location = useLocation();
   
@@ -49,24 +51,33 @@ const Movies = () => {
       console.error('Error searching movies:', error);
     }
   };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
-  return (
-    <div>
-      <h1>Search Movies</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Enter movie title"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
 
-      
-      <MoviesList movies={searchResults} />
-    </div>
-  );
-}
+    return (
+        <div className={styles.moviesContainer}>
+          <h1>Search Movies</h1>
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Enter movie title"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className={styles.searchInput}
+            />
+            <button onClick={handleSearch} className={styles.searchButton}>
+              Search
+            </button>
+          </div>
+    
+          <MoviesList movies={searchResults} />
+        </div>
+      );
+    };
 
 export default Movies;

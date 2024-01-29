@@ -1,14 +1,16 @@
-
-
 .moviesList {
     list-style: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between; 
   }
   
   .moviesListItem {
     margin: 10px;
+    flex: 0 0 calc(20% - 20px); 
+    max-width: calc(20% - 20px); 
+    box-sizing: border-box; 
   }
   
   .moviesListLink {
@@ -19,7 +21,7 @@
   }
   
   .moviesListImg {
-    max-width: 100%;
+    width: 100%; 
     height: auto;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
