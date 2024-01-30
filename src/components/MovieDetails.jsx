@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, Route, Routes, useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { NavLink, Route, Routes, useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import Cast from './Cast';
 import Reviews from './Reviews';
 import { getMovieId } from '../services/api';
 import styles from '../css/MovieDetails.module.css';
 import styled from 'styled-components';
 
+
 const MovieDetails = () => {
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? '/movie');
+
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const navigate = useNavigate();
@@ -53,8 +57,14 @@ const MovieDetails = () => {
   const defaultImg =
     'https://via.placeholder.com/200x300?text=No+Image+Available';
 
+    
+
+
   return (
     <div className={styles.movieDetailsContainer}>
+    <Link to={backLinkRef.current} className={styles.backLink}>
+        Go back
+      </Link>
       <div className={styles.movieDetails}>
         <img
           className={styles.moviePoster}
