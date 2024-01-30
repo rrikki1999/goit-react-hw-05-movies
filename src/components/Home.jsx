@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { requestTrendingMovies } from '../services/api'; 
+import { requestTrendingMovies } from '../services/api';
+import { MoviesList } from './Movies';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -17,16 +18,18 @@ const Home = () => {
     fetchTrendingMovies();
   }, []);
 
+  const titleStyle = {
+    color: '#2C2B2B',
+    fontSize: '24px',
+    paddingLeft: '50px',
+  };
+
   return (
     <div>
-      <h1>Trending Movies</h1>
-      <ul>
-        {trendingMovies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
+      <h1 style={titleStyle}>Trending Movies</h1>
+      <MoviesList movies={trendingMovies} />
     </div>
   );
-}
+};
 
 export default Home;

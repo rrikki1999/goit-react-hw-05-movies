@@ -1,27 +1,23 @@
-
 .moviesContainer {
-    text-align: center;
-  }
-  
-  .searchContainer {
-    margin-bottom: 20px;
-  }
-  
-  .searchInput {
-    padding: 8px;
-    font-size: 16px;
-    
-  }
-  
-  .searchButton {
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  h1 {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  
+  text-align: center;
+}
+
+.searchContainer {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.searchButton {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+}

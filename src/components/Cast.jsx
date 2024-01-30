@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCreditsId } from '../services/api'; 
+import { getCreditsId } from '../services/api';
 import { useParams } from 'react-router-dom';
 
 const Cast = () => {
@@ -23,12 +23,12 @@ const Cast = () => {
     <div>
       <h1>Movie Cast</h1>
       <ul>
-        {cast.map((actor) => (
+        {cast.map(actor => (
           <li key={actor.id}>{actor.name}</li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default Cast;
