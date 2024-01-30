@@ -1,6 +1,23 @@
 .movieDetailsContainer {
-  max-width: 800px;
   padding: 50px;
+}
+
+.movieDetails {
+  display: flex;
+  align-items: flex-start;
+}
+
+.moviePoster {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  margin-right: 20px;
+  margin-bottom: 50px;
+}
+
+.movieInfoContainer {
+  flex-grow: 1;
+  padding-left: 50px;
 }
 
 .movieTitle {
@@ -13,7 +30,26 @@
 .movieOverview {
   font-size: 20px;
   color: #666;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.movieRelease,
+.movieRating,
+.movieGenres {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.genre {
+  margin-right: 5px;
+  color: #444;
+}
+
+.title {
+  font-size: 24px;
+  color: #444;
+  margin-bottom: 20px;
 }
 
 .navigationList {
@@ -26,42 +62,4 @@
   display: inline-block;
   margin-right: 50px;
   margin-bottom: 50px;
-}
-
-.movieInfo {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.moviePoster {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  margin-right: 20px;
-  margin-bottom: 50px;
-}
-
-.movieRelease,
-.movieRating {
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.movieGenres {
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 50px;
-}
-
-.genre {
-  margin-right: 5px;
-  color: #444;
-}
-
-.title {
-  font-size: 24px;
-  color: #444;
-  margin-bottom: 20px;
 }

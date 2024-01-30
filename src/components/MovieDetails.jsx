@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  NavLink,
-  Route,
-  Routes,
-  useParams,
-  useNavigate,
-} from 'react-router-dom';
+import { NavLink, Route, Routes, useParams, useNavigate } from 'react-router-dom';
 import Cast from './Cast';
 import Reviews from './Reviews';
 import { getMovieId } from '../services/api';
@@ -34,6 +28,7 @@ const MovieDetails = () => {
   if (!movie || !movie.title) {
     return null;
   }
+
   const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: #444444;
@@ -51,6 +46,7 @@ const MovieDetails = () => {
       background-color: #e1dcdc;
     }
   `;
+
   const { title, overview, poster_path, release_date, vote_average, genres } =
     movie;
 
@@ -69,20 +65,20 @@ const MovieDetails = () => {
           }
           alt={title}
         />
-        <ul className={styles.movieInfo}>
-          <li className={styles.movieTitle}>{title}</li>
-          <li className={styles.movieRelease}>Release date: {release_date}</li>
-          <li className={styles.movieRating}>Rating: {vote_average}</li>
-          <li className={styles.movieOverview}>{overview}</li>
-          <li className={styles.movieGenres}>
+        <div className={styles.movieInfoContainer}>
+          <h1 className={styles.movieTitle}>{title}</h1>
+          <p className={styles.movieRelease}>Release date: {release_date}</p>
+          <p className={styles.movieRating}>Rating: {vote_average}</p>
+          <p className={styles.movieOverview}>{overview}</p>
+          <p className={styles.movieGenres}>
             Genres:{' '}
             {genres.map(genre => (
               <span key={genre.id} className={styles.genre}>
                 {genre.name}
               </span>
             ))}
-          </li>
-        </ul>
+          </p>
+        </div>
       </div>
 
       <h3 className={styles.title}>Additional information</h3>
