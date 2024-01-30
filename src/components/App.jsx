@@ -6,10 +6,12 @@ import Cast from './Cast';
 import Reviews from './Reviews';
 import { SharedLayout } from './SharedLayout';
 import NotFound from './NotFound';
+import { Loader } from './Loader';
 
 export const App = () => {
   return (
     <div>
+      
       <SharedLayout />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -19,6 +21,7 @@ export const App = () => {
         <Route path="reviews" element={<Reviews />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Loader/>
     </div>
   );
 };
