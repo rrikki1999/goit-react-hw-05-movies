@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, Route, Routes, useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import { NavLink, Route, Routes, useParams, useNavigate, useLocation } from 'react-router-dom';
 import Cast from './Cast';
 import Reviews from './Reviews';
 import { getMovieId } from '../services/api';
@@ -36,7 +36,7 @@ const MovieDetails = () => {
   const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: #444444;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     transition: background-color 0.3s;
     border-radius: 90px;
@@ -55,16 +55,17 @@ const MovieDetails = () => {
     movie;
 
   const defaultImg =
-    'https://via.placeholder.com/200x300?text=No+Image+Available';
+    'https://via.placeholder.com/500x600?text=No+Image+Available';
+    
 
     
 
 
   return (
     <div className={styles.movieDetailsContainer}>
-    <Link to={backLinkRef.current} className={styles.backLink}>
+    <StyledNavLink to={backLinkRef.current}>
         Go back
-      </Link>
+      </StyledNavLink>
       <div className={styles.movieDetails}>
         <img
           className={styles.moviePoster}
@@ -74,6 +75,7 @@ const MovieDetails = () => {
               : defaultImg
           }
           alt={title}
+          style={!poster_path ? { width: '270px', height: '320px', objectFit: 'cover' } : null}
         />
         <div className={styles.movieInfoContainer}>
           <h1 className={styles.movieTitle}>{title}</h1>

@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { requestTrendingMovies } from '../services/api';
-import { MoviesList } from './Movies';
+import { MoviesList } from '../components/MoviesList';
+import { Loader } from 'components/Loader';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchTrendingMovies = async () => {
       try {
         const response = await requestTrendingMovies();
         setTrendingMovies(response.data.results);
       } catch (error) {
-        console.error('Error fetching trending movies:', error);
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -27,7 +33,9 @@ const Home = () => {
   return (
     <div>
       <h1 style={titleStyle}>Trending Movies</h1>
-      <MoviesList movies={trendingMovies} />
+      {isLoading && <Loader />}
+      {error && <p>Something went wrong...</p>}
+      {trendingMovies.length > 0 && <MoviesList movies={trendingMovies} />}
     </div>
   );
 };
