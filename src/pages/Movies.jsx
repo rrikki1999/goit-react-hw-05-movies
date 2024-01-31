@@ -4,7 +4,8 @@ import { searchMovies } from '../services/api';
 import styles from '../css/Movies.module.css';
 import { MoviesList } from '../components/MoviesList';
 import { Loader } from 'components/Loader';
-import { FormMovies } from '../components/FormMovies';
+import { FormMovies } from 'components/FormMovies';
+
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
