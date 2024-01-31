@@ -1,11 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, Route, Routes, useParams, useNavigate, useLocation } from 'react-router-dom';
-import Cast from './Cast';
-import Reviews from './Reviews';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import {
+  NavLink,
+  Route,
+  Routes,
+  useParams,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
+
 import { getMovieId } from '../services/api';
+
 import styles from '../css/MovieDetails.module.css';
 import styled from 'styled-components';
+import { Loader } from 'components/Loader';
 
+// import Cast from './Cast';
+// import Reviews from './Reviews';
+
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -56,16 +69,10 @@ const MovieDetails = () => {
 
   const defaultImg =
     'https://via.placeholder.com/500x600?text=No+Image+Available';
-    
-
-    
-
 
   return (
     <div className={styles.movieDetailsContainer}>
-    <StyledNavLink to={backLinkRef.current}>
-        Go back
-      </StyledNavLink>
+      <StyledNavLink to={backLinkRef.current}>Go back</StyledNavLink>
       <div className={styles.movieDetails}>
         <img
           className={styles.moviePoster}
@@ -75,7 +82,11 @@ const MovieDetails = () => {
               : defaultImg
           }
           alt={title}
-          style={!poster_path ? { width: '270px', height: '320px', objectFit: 'cover' } : null}
+          style={
+            !poster_path
+              ? { width: '270px', height: '320px', objectFit: 'cover' }
+              : null
+          }
         />
         <div className={styles.movieInfoContainer}>
           <h1 className={styles.movieTitle}>{title}</h1>
@@ -108,10 +119,12 @@ const MovieDetails = () => {
         </ul>
       </nav>
 
-      <Routes>
-        <Route path="cast" element={<Cast />} />
-        <Route path="reviews" element={<Reviews />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };
