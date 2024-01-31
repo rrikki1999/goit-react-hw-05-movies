@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../css/Movies.module.css';
 
-const Form = ({ onClick, searchQuery, setSearchQuery, handleKeyPress }) => {
+const FormMovies = ({ onClick, searchQuery, setSearchQuery, handleKeyPress }) => {
   return (
     <form onClick={e => onClick(e)}>
       <div className={styles.searchContainer}>
@@ -19,4 +19,4 @@ const Form = ({ onClick, searchQuery, setSearchQuery, handleKeyPress }) => {
   );
 };
 
-export default Form;
+export default FormMovies; 

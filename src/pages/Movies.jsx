@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Form, useSearchParams } from 'react-router-dom';
+import {  useSearchParams } from 'react-router-dom';
 import { searchMovies } from '../services/api';
 import styles from '../css/Movies.module.css';
 import { MoviesList } from '../components/MoviesList';
 import { Loader } from 'components/Loader';
-
+import { FormMovies } from '../components/FormMovies';
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +49,7 @@ const Movies = () => {
       {isLoading && <Loader />}
       {error && <p>Something went wrong...</p>}
 
-      <Form
+      <FormMovies
   onClick={searchSubmit}
   searchQuery={searchQuery}
   setSearchQuery={setSearchQuery}
