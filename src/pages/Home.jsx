@@ -8,7 +8,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     setIsLoading(true);
     const fetchTrendingMovies = async () => {
       try {

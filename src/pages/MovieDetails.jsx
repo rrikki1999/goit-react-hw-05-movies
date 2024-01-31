@@ -12,17 +12,15 @@ import { getMovieId } from '../services/api';
 
 import styles from '../css/MovieDetails.module.css';
 import styled from 'styled-components';
+import navigationStyles from '../css/NavigationStyles.module.css';
 import { Loader } from 'components/Loader';
-
-// import Cast from './Cast';
-// import Reviews from './Reviews';
 
 const Cast = lazy(() => import('./Cast'));
 const Reviews = lazy(() => import('./Reviews'));
 
 const MovieDetails = () => {
   const location = useLocation();
-  const backLinkRef = useRef(location.state?.from ?? '/movie');
+  const backLinkRef = useRef(location.state?.from ?? '/');
 
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
@@ -45,23 +43,8 @@ const MovieDetails = () => {
   if (!movie || !movie.title) {
     return null;
   }
-
   const StyledNavLink = styled(NavLink)`
-    text-decoration: none;
-    color: #444444;
-    font-size: 20px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    border-radius: 90px;
-    padding: 10px;
-
-    &.active {
-      background-color: #e1dcdc;
-    }
-
-    &:hover {
-      background-color: #e1dcdc;
-    }
+    ${navigationStyles.navigationLink}
   `;
 
   const { title, overview, poster_path, release_date, vote_average, genres } =
@@ -72,7 +55,12 @@ const MovieDetails = () => {
 
   return (
     <div className={styles.movieDetailsContainer}>
-      <StyledNavLink to={backLinkRef.current}>Go back</StyledNavLink>
+      <StyledNavLink
+        to={backLinkRef.current}
+        className={navigationStyles.navigationLink}
+      >
+        Go back
+      </StyledNavLink>
       <div className={styles.movieDetails}>
         <img
           className={styles.moviePoster}
@@ -82,11 +70,6 @@ const MovieDetails = () => {
               : defaultImg
           }
           alt={title}
-          style={
-            !poster_path
-              ? { width: '270px', height: '320px', objectFit: 'cover' }
-              : null
-          }
         />
         <div className={styles.movieInfoContainer}>
           <h1 className={styles.movieTitle}>{title}</h1>
@@ -109,10 +92,18 @@ const MovieDetails = () => {
       <nav>
         <ul className={styles.navigationList}>
           <li className={styles.navigationItem}>
-            <StyledNavLink to={`/movies/${movieId}/cast`}>Cast</StyledNavLink>
+            <StyledNavLink
+              to={`/movies/${movieId}/cast`}
+              className={navigationStyles.navigationLink}
+            >
+              Cast
+            </StyledNavLink>
           </li>
           <li className={styles.navigationItem}>
-            <StyledNavLink to={`/movies/${movieId}/reviews`}>
+            <StyledNavLink
+              to={`/movies/${movieId}/reviews`}
+              className={navigationStyles.navigationLink}
+            >
               Reviews
             </StyledNavLink>
           </li>

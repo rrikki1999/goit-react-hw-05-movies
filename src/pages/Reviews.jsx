@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { getReviewsForMovie } from '../services/api';
 import { useParams } from 'react-router-dom';
 import styles from '../css/Reviews.module.css';
+import { Loader } from 'components/Loader';
 
 const Reviews = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchMovieReviews = async () => {
       try {
         const response = await getReviewsForMovie(movieId);
         setReviews(response.data.results);
       } catch (error) {
-        console.error('Error fetching movie reviews:', error);
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -23,6 +29,8 @@ const Reviews = () => {
   return (
     <div className={styles.reviewsContainer}>
       <h1 >Movie Reviews</h1>
+      {isLoading && <Loader />}
+      {error && <p>Something went wrong...</p>}
       <ul className={styles.reviewsList}>
         {reviews.map(review => (
           <li key={review.id} className={styles.reviewItem}>

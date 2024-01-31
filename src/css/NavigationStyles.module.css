@@ -1,0 +1,17 @@
+.navigationLink {
+  text-decoration: none;
+  color: #444444;
+  font-size: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border-radius: 90px;
+  padding: 10px;
+}
+
+.navigationLink.active {
+  background-color: #e1dcdc;
+}
+
+.navigationLink:hover {
+  background-color: #e1dcdc;
+}
