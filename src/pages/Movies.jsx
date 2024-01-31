@@ -9,8 +9,8 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [previousQuery, setPreviousQuery] = useState('');
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const query = searchParams.get('sQuery');
 
@@ -20,7 +20,6 @@ const Movies = () => {
         setIsLoading(true);
         if (query && query.trim() !== '') {
           setMovies([]);
-          setPreviousQuery(query);
           const data = await searchMovies(query);
           if (Array.isArray(data.results)) {
             setMovies(data.results);
@@ -36,7 +35,7 @@ const Movies = () => {
     searchMovie();
   }, [query]);
 
-  const searchSubmit = (e) => {
+  const searchSubmit = e => {
     e.preventDefault();
     const searchValue = e.currentTarget.elements.query.value.trim();
     setSearchParams({
@@ -49,9 +48,14 @@ const Movies = () => {
       <h1>Search Movies</h1>
       {isLoading && <Loader />}
       {error && <p>Something went wrong...</p>}
-      
 
-      <Form onClick={searchSubmit}/>
+      <Form
+  onClick={searchSubmit}
+  searchQuery={searchQuery}
+  setSearchQuery={setSearchQuery}
+  
+/>
+
       {movies.length > 0 && <MoviesList movies={movies} />}
     </div>
   );
