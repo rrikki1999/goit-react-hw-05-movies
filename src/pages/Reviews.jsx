@@ -32,12 +32,13 @@ const Reviews = () => {
       {isLoading && <Loader />}
       {error && <p>Something went wrong...</p>}
       <ul className={styles.reviewsList}>
-        {reviews.map(review => (
+        { reviews.length > 0 ? ( reviews.map(review => (
           <li key={review.id} className={styles.reviewItem}>
             <h3 className={styles.reviewAuthor}>{review.author}</h3>
             <p className={styles.reviewContent}>{review.content}</p>
           </li>
-        ))}
+        ))
+      ) : ( <p> There are no reviews yet..</p>)}
       </ul>
     </div>
   );

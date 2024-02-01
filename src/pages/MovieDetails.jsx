@@ -4,7 +4,6 @@ import {
   Route,
   Routes,
   useParams,
-  useNavigate,
   useLocation,
 } from 'react-router-dom';
 
@@ -24,31 +23,39 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchMovieDetails = async () => {
       try {
         const response = await getMovieId(movieId);
         setMovie(response.data);
       } catch (error) {
-        console.error('Error fetching movie details:', error);
-        navigate('/not-found');
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchMovieDetails();
-  }, [movieId, navigate]);
+  }, [movieId]);
 
-  if (!movie || !movie.title) {
-    return null;
-  }
   const StyledNavLink = styled(NavLink)`
     ${navigationStyles.navigationLink}
   `;
 
-  const { title, overview, poster_path, release_date, vote_average, genres } =
-    movie;
+  const {
+    title,
+    name,
+    original_title,
+    overview,
+    poster_path,
+    release_date,
+    vote_average,
+    genres,
+  } = movie;
 
   const defaultImg =
     'https://via.placeholder.com/500x600?text=No+Image+Available';
@@ -61,6 +68,8 @@ const MovieDetails = () => {
       >
         Go back
       </StyledNavLink>
+      {isLoading && <Loader />}
+      {error && <p>Something went wrong...</p>}
       <div className={styles.movieDetails}>
         <img
           className={styles.moviePoster}
@@ -69,16 +78,18 @@ const MovieDetails = () => {
               ? `https://image.tmdb.org/t/p/w200${poster_path}`
               : defaultImg
           }
-          alt={title}
+          alt={title || name || original_title}
         />
         <div className={styles.movieInfoContainer}>
-          <h1 className={styles.movieTitle}>{title}</h1>
+          <h1 className={styles.movieTitle}>
+            {title || name || original_title}
+          </h1>
           <p className={styles.movieRelease}>Release date: {release_date}</p>
           <p className={styles.movieRating}>Rating: {vote_average}</p>
           <p className={styles.movieOverview}>{overview}</p>
           <p className={styles.movieGenres}>
             Genres:{' '}
-            {genres.map(genre => (
+            {genres?.map(genre => (
               <span key={genre.id} className={styles.genre}>
                 {genre.name}
               </span>

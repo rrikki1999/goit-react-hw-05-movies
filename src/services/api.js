@@ -34,7 +34,7 @@ export const searchMovies = async query => {
       Authorization: `Bearer ${AUTH_KEY}`,
     },
   };
-  const data = await axios(options);
+  const {data} = await axios(options);
   return data;
 };
 

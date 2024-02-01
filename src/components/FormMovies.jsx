@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../css/Movies.module.css';
 
-const FormMovies = ({ onClick, searchQuery, setSearchQuery, handleKeyPress }) => {
+const FormMovies = ({ handleSubmit }) => {
+  const [query, setQuery] = useState('');
+
+  const handleChange = e => {
+    setQuery(e.target.value);
+  };
+
+  const onHandleSubmit = e => {
+    e.preventDefault();
+    if (!query.trim()) {
+      return;
+    }
+    handleSubmit(query);
+    setQuery('');
+  };
   return (
-    <form onClick={e => onClick(e)}>
+    <form onClick={onHandleSubmit}>
       <div className={styles.searchContainer}>
         <input
-          type="text"
+          name="query"
           placeholder="Enter movie title"
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          onKeyPress={handleKeyPress}
+          value={query}
+          type="text"
+          onChange={handleChange}
           className={styles.searchInput}
+          autoComplete='true'
         />
         <button className={styles.searchButton}>Search</button>
       </div>
@@ -19,4 +34,4 @@ const FormMovies = ({ onClick, searchQuery, setSearchQuery, handleKeyPress }) =>
   );
 };
 
-export default FormMovies; 
+export default FormMovies;
