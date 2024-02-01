@@ -10,7 +10,6 @@ import {
 import { getMovieId } from '../services/api';
 
 import styles from '../css/MovieDetails.module.css';
-import styled from 'styled-components';
 import navigationStyles from '../css/NavigationStyles.module.css';
 import { Loader } from 'components/Loader';
 
@@ -42,9 +41,6 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  const StyledNavLink = styled(NavLink)`
-    ${navigationStyles.navigationLink}
-  `;
 
   const {
     title,
@@ -62,12 +58,18 @@ const MovieDetails = () => {
 
   return (
     <div className={styles.movieDetailsContainer}>
-      <StyledNavLink
+      <NavLink
+        className={({ isActive }) => {
+          return isActive
+            ? [navigationStyles.navigationLink, navigationStyles.active].join(
+                ' '
+              )
+            : navigationStyles.navigationLink;
+        }}
         to={backLinkRef.current}
-        className={navigationStyles.navigationLink}
       >
         Go back
-      </StyledNavLink>
+      </NavLink>
       {isLoading && <Loader />}
       {error && <p>Something went wrong...</p>}
       <div className={styles.movieDetails}>
@@ -103,20 +105,34 @@ const MovieDetails = () => {
       <nav>
         <ul className={styles.navigationList}>
           <li className={styles.navigationItem}>
-            <StyledNavLink
+            <NavLink
+              className={({ isActive }) => {
+                return isActive
+                  ? [
+                      navigationStyles.navigationLink,
+                      navigationStyles.active,
+                    ].join(' ')
+                  : navigationStyles.navigationLink;
+              }}
               to={`/movies/${movieId}/cast`}
-              className={navigationStyles.navigationLink}
             >
               Cast
-            </StyledNavLink>
+            </NavLink>
           </li>
           <li className={styles.navigationItem}>
-            <StyledNavLink
+            <NavLink
+              className={({ isActive }) => {
+                return isActive
+                  ? [
+                      navigationStyles.navigationLink,
+                      navigationStyles.active,
+                    ].join(' ')
+                  : navigationStyles.navigationLink;
+              }}
               to={`/movies/${movieId}/reviews`}
-              className={navigationStyles.navigationLink}
             >
               Reviews
-            </StyledNavLink>
+            </NavLink>
           </li>
         </ul>
       </nav>
